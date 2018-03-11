@@ -5,6 +5,12 @@ import App from './App'
 import router from './router'
 import firebase from 'firebase'
 
+// Import component file
+import TheHeader from './components/TheHeader'
+
+// Register component
+Vue.component('the-header', TheHeader)
+
 Vue.config.productionTip = false
 
 let app;
@@ -19,13 +25,25 @@ let config = {
 
 firebase.initializeApp(config)
 firebase.auth().onAuthStateChanged(function(user) {
-  if (!app) {
+
+  // if (!app) {
     /* eslint-disable no-new */
+
+    // Re-render app whenever auth state changes
     app = new Vue({
       el: '#app',
+      data: function() {
+        return {
+          user
+        }
+      },
       template: '<App/>',
-      components: { App },
+      components: { 
+        App,
+        'the-header': TheHeader
+      },
+      // Store current user on the root vue instance?
       router
     })
-  }
+  // }
 });
