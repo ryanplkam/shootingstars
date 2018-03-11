@@ -4,8 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import 'normalize.css'
 
-// Import component file
+// Import component
 import TheHeader from './components/TheHeader'
 
 // Register component
@@ -32,12 +33,15 @@ firebase.auth().onAuthStateChanged(function(user) {
     // Re-render app whenever auth state changes
     app = new Vue({
       el: '#app',
+
+      // Store current user
       data: function() {
         return {
           user
         }
       },
-      template: '<App/>',
+      // Pass 'user' prop into App component
+      template: '<App :currentUser="user"/>',
       components: { 
         App,
         'the-header': TheHeader

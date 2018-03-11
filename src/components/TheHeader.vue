@@ -1,5 +1,5 @@
 <template>
-  <header>Hi {{ this.$root.$data.user ? this.$root.$data.user.email : "" }}</header>
+  <header>Hi {{ currentUser ? currentUser.email : "" }}</header>
 </template>
 
 <script>
@@ -8,12 +8,17 @@
 
   export default {
     name: 'the-header',
-    // es6 implicit return
-    data() {
-      return {
-        currentUser: firebase.auth().currentUser
-      }
-    }
-
+    // receive the prop
+    // Root vue instance => App.vue => TheHeader.vue
+    props: ['currentUser']
   }
 </script>
+
+<style>
+  header {
+    flex: 0 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+</style>

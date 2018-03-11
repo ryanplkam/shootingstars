@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <the-header></the-header>
+    <!-- prop kebab cased in html/markup-->
+    <the-header v-if="currentUser" :current-user="currentUser"></the-header>
     <img src="./assets/logo.png">
     <router-view></router-view>
   </div>
@@ -8,7 +9,10 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  // Receive the prop from Root vue instance
+  // Props have to be camelCased in JS
+  props: ['currentUser']
 }
 </script>
 
@@ -22,6 +26,8 @@ export default {
   margin-top: 60px;
   display: flex;
   flex-direction: column;
+  max-width: 1684px;
+  margin: 0 auto;
 }
 
 img {
